@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Microeconomía con Enfoque Práctico | Web interactiva</title>
+<style>
+:root {
+  --bg:#f7f5ef; --panel:#ffffff; --panel2:#f1efe7; --text:#07183a; --muted:#4f5f73;
+  --accent:#0b2b61; --gold:#b8872b; --green:#2f6f18; --blue:#1f75b8; --sky:#7fc4e8; --red:#b54b42; --line:rgba(7,24,58,.14);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(circle at top left,#ffffff 0,#f7f5ef 48%,#e9e4d8 100%);font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;color:var(--text)}
+a{color:inherit;text-decoration:none}
+.app{display:grid;grid-template-columns:310px 1fr;min-height:100vh}
+aside{position:sticky;top:0;height:100vh;overflow:auto;background:rgba(255,255,255,.94);border-right:1px solid var(--line);padding:24px 18px;backdrop-filter:blur(12px);box-shadow:8px 0 30px rgba(7,24,58,.08)}
+.brand{border:1px solid rgba(184,135,43,.28);border-radius:22px;padding:18px;background:linear-gradient(135deg,rgba(255,255,255,.96),rgba(241,239,231,.9));box-shadow:0 16px 40px rgba(7,24,58,.10)}
+.brand .small{color:var(--gold);font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;font-weight:800}
+.brand h1{font-size:1.15rem;line-height:1.15;margin:10px 0 6px}
+.brand p{font-size:.84rem;color:var(--muted);line-height:1.35;margin:0}
+.nav-title{font-size:.76rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin:20px 8px 10px}
+.nav a{display:flex;gap:10px;align-items:center;padding:12px 13px;border-radius:14px;color:var(--accent);margin:4px 0;border:1px solid transparent}
+.nav a:hover,.nav a.active{background:rgba(47,111,24,.10);border-color:rgba(47,111,24,.22)}
+.nav b{display:grid;place-items:center;min-width:28px;height:28px;border-radius:9px;background:rgba(47,111,24,.12);color:var(--green);font-size:.82rem}
+main{padding:0 0 80px}
+.hero{min-height:100vh;display:grid;align-items:center;padding:60px clamp(24px,5vw,74px);position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:8%;background:radial-gradient(circle at 70% 20%,rgba(31,117,184,.18),transparent 35%),radial-gradient(circle at 20% 80%,rgba(47,111,24,.14),transparent 42%);filter:blur(6px);pointer-events:none}
+.cover{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:center}
+.cover-card{border:1px solid rgba(184,135,43,.25);border-radius:34px;padding:42px;background:linear-gradient(160deg,rgba(255,255,255,.96),rgba(241,239,231,.82));box-shadow:0 30px 85px rgba(7,24,58,.14)}
+.kicker{color:var(--gold);text-transform:uppercase;letter-spacing:.17em;font-size:.83rem;font-weight:900}
+.cover h2{font-size:clamp(2.4rem,5vw,5.8rem);line-height:.94;margin:16px 0 18px;letter-spacing:-.06em}
+.cover p{color:var(--muted);font-size:1.08rem;line-height:1.65;max-width:800px}
+.actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
+.btn{border:0;border-radius:999px;padding:13px 18px;font-weight:850;cursor:pointer;background:var(--green);color:#fff;box-shadow:0 10px 28px rgba(47,111,24,.22)}
+.btn.secondary{background:#fff;color:var(--accent);border:1px solid var(--line);box-shadow:none}
+.book-visual{min-height:460px;border-radius:32px;border:1px solid rgba(184,135,43,.26);background:linear-gradient(145deg,#ffffff,#f1efe7);position:relative;padding:34px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.6),0 35px 90px rgba(7,24,58,.16)}
+.book-visual:before{content:"";position:absolute;left:32px;top:28px;bottom:28px;width:20px;border-radius:14px;background:linear-gradient(var(--accent),var(--green))}
+.book-visual h3{font-size:2.3rem;line-height:1.02;margin:30px 0 0 30px;letter-spacing:-.04em}
+.book-visual .curve{position:absolute;right:36px;bottom:36px;width:190px;height:120px;border:5px solid transparent;border-bottom-color:var(--green);border-radius:0 0 190px 190px;opacity:.75}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+.stat{border:1px solid var(--line);background:rgba(255,255,255,.80);border-radius:18px;padding:16px}
+.stat strong{font-size:1.8rem;color:var(--gold)} .stat span{display:block;color:var(--muted);font-size:.85rem;margin-top:4px}
+
+.visit-counter{margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:16px;border:1px solid rgba(184,135,43,.30);border-radius:20px;padding:16px 18px;background:linear-gradient(135deg,rgba(184,135,43,.10),rgba(47,111,24,.08));box-shadow:0 12px 28px rgba(7,24,58,.08)}
+.visit-counter .label{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:900}
+.visit-counter .count{font-size:2.05rem;line-height:1;color:var(--accent);font-weight:950;letter-spacing:-.04em}
+.visit-counter .note{font-size:.78rem;color:var(--muted);line-height:1.35}
+.visit-counter button{border:1px solid rgba(7,24,58,.14);background:#fff;color:var(--accent);border-radius:999px;padding:9px 12px;font-weight:850;cursor:pointer}
+.visit-counter button:hover{border-color:rgba(47,111,24,.45)}
+.section{padding:42px clamp(22px,4vw,68px);border-top:1px solid var(--line)}
+.chapter-head{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;margin-bottom:24px}
+.chapter-head h2{font-size:clamp(1.8rem,3.4vw,3.4rem);line-height:1;margin:0;letter-spacing:-.045em}
+.chapter-head p{color:var(--muted);max-width:680px;line-height:1.55}
+.badge{white-space:nowrap;border:1px solid rgba(255,209,102,.35);background:rgba(255,209,102,.1);color:var(--gold);border-radius:999px;padding:10px 14px;font-weight:850}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.card{border:1px solid var(--line);border-radius:24px;background:rgba(255,255,255,.88);padding:22px;box-shadow:0 12px 30px rgba(7,24,58,.09)}
+.card h3{margin:0 0 14px;font-size:1.14rem;color:var(--accent)}
+ul.clean{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+ul.clean li{padding:12px;border-radius:14px;background:rgba(241,239,231,.75);border:1px solid rgba(7,24,58,.08);color:var(--text);line-height:1.38}
+.formula{font-family:Consolas,Menlo,monospace;background:#eef5fb;border:1px solid rgba(31,117,184,.25);border-radius:14px;padding:12px;color:var(--accent);margin:8px 0;overflow:auto}
+.exercise{border:1px solid var(--line);border-radius:18px;padding:15px;background:rgba(255,255,255,.72);margin:10px 0}
+.exercise .tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.reveal{display:none;margin-top:10px;color:var(--text);background:rgba(47,111,24,.08);border-left:3px solid var(--green);padding:10px;border-radius:10px}
+.quiz{display:grid;gap:14px}
+.q{border:1px solid var(--line);border-radius:18px;padding:16px;background:rgba(255,255,255,.72)}
+.q p{margin:0 0 10px;font-weight:750}
+.option{display:block;width:100%;text-align:left;padding:10px 12px;margin:7px 0;border-radius:12px;border:1px solid rgba(7,24,58,.14);background:#fff;color:var(--text);cursor:pointer}
+.option:hover{border-color:rgba(47,111,24,.45)}
+.option.correct{background:rgba(131,227,119,.16);border-color:rgba(131,227,119,.55)}
+.option.wrong{background:rgba(255,107,107,.14);border-color:rgba(255,107,107,.55)}
+.feedback{display:none;color:var(--muted);font-size:.92rem;margin-top:8px}
+.scorebox{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);background:rgba(255,255,255,.80);border-radius:18px;padding:15px;margin-top:16px}
+.inputrow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:10px 0}
+.inputrow label{font-size:.75rem;color:var(--muted);display:block;margin-bottom:5px}
+input,select{width:100%;border-radius:12px;border:1px solid rgba(7,24,58,.16);background:#fff;color:var(--text);padding:11px}
+.result{margin-top:12px;padding:13px;border-radius:14px;background:rgba(184,135,43,.12);border:1px solid rgba(184,135,43,.28);color:#5c4210;line-height:1.5}
+.footer{padding:32px clamp(22px,4vw,68px);color:var(--muted);border-top:1px solid var(--line);text-align:center}
+.mobile-menu{display:none;position:fixed;right:16px;bottom:16px;z-index:30}
+@media(max-width:980px){.app{display:block}aside{position:fixed;inset:0 auto 0 0;z-index:20;width:310px;transform:translateX(-105%);transition:.25s}aside.open{transform:none}.mobile-menu{display:block}.cover{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.chapter-head{display:block}.inputrow{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.hero{padding:28px 16px}.cover-card{padding:26px}.section{padding:32px 16px}.stats{grid-template-columns:1fr}.inputrow{grid-template-columns:1fr}}
+
+/* Módulo de opinión estudiantil */
+.opinion-layout{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+.opinion-form{display:grid;gap:12px}
+.opinion-form textarea{min-height:150px;resize:vertical;border-radius:16px;border:1px solid rgba(7,24,58,.16);padding:13px;font-family:inherit;line-height:1.5;color:var(--text);background:#fff}
+.opinion-form .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rating-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.rating-row button{border:1px solid rgba(184,135,43,.32);background:#fff;color:var(--accent);border-radius:999px;padding:9px 12px;font-weight:850;cursor:pointer}
+.rating-row button.active,.rating-row button:hover{background:rgba(184,135,43,.14);border-color:var(--gold)}
+.opinion-list{display:grid;gap:12px;max-height:560px;overflow:auto;padding-right:4px}
+.opinion-item{border:1px solid rgba(7,24,58,.12);border-radius:18px;background:rgba(255,255,255,.78);padding:15px}
+.opinion-item .meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:.82rem;margin-bottom:8px}
+.opinion-item .stars{color:var(--gold);font-weight:900;letter-spacing:.08em}
+.opinion-item p{margin:0;color:var(--text);line-height:1.55}
+.opinion-tools{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.empty-opinions{border:1px dashed rgba(7,24,58,.22);border-radius:18px;padding:18px;color:var(--muted);background:rgba(241,239,231,.55);line-height:1.5}
+@media(max-width:980px){.opinion-layout{grid-template-columns:1fr}.opinion-form .two{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+<div class="app">
+<aside id="sidebar">
+  <div class="brand"><div class="small">Web interactiva</div><h1>Microeconomía con Enfoque Práctico</h1><p>Dr. Antonio Salazar Campos · Universidad del Istmo · ISBN en proceso</p></div>
+  <div class="nav-title">Contenido</div>
+  <nav class="nav" id="nav"></nav>
+</aside>
+<main>
+<section class="hero" id="inicio">
+  <div class="cover">
+    <div class="cover-card">
+      <div class="kicker">Primera edición ampliada y revisada</div>
+      <h2>Microeconomía con Enfoque Práctico</h2>
+      <p>Micrositio académico para estudiar, practicar y evaluar los conceptos centrales del libro: escasez, oferta y demanda, elasticidad, consumidor, producción, estructuras de mercado, fallas de mercado y distribución del ingreso.</p>
+      <div class="stats"><div class="stat"><strong>8</strong><span>capítulos</span></div><div class="stat"><strong>40+</strong><span>ejercicios y actividades</span></div><div class="stat"><strong>40</strong><span>reactivos interactivos</span></div></div>
+      <div class="visit-counter" aria-live="polite">
+        <div>
+          <div class="label">Contador de visitas</div>
+          <div class="count" id="visitCount">0</div>
+          <div class="note">Registro local de visitas en este navegador/dispositivo.</div>
+        </div>
+        <button type="button" onclick="resetVisitCounter()">Reiniciar</button>
+      </div>
+      <div class="actions"><a class="btn" href="#cap1">Comenzar curso</a><button class="btn secondary" onclick="print()">Imprimir / guardar PDF</button></div>
+    </div>
+    <div class="book-visual"><h3>Comprender para analizar.<br>Analizar para decidir.</h3><p style="margin:24px 0 0 30px;color:var(--muted);line-height:1.6">Portada digital inicial con navegación por capítulos, ejercicios desplegables y evaluación automática.</p><div class="curve"></div></div>
+  </div>
+</section>
+<div id="chapters"></div>
+
+<section class="section" id="opinion">
+  <div class="chapter-head">
+    <div>
+      <div class="kicker">Retroalimentación estudiantil</div>
+      <h2>Opinión sobre la web interactiva y el libro</h2>
+      <p>Este apartado permite que los estudiantes registren su punto de vista sobre la utilidad de la web, la claridad del libro, los ejercicios y las oportunidades de mejora. Las opiniones se guardan localmente en este navegador/dispositivo.</p>
+    </div>
+    <div class="badge">Participación del estudiante</div>
+  </div>
+
+  <div class="opinion-layout">
+    <div class="card">
+      <h3>Agregar opinión</h3>
+      <form class="opinion-form" onsubmit="saveStudentOpinion(event)">
+        <div class="two">
+          <div>
+            <label>Nombre del estudiante</label>
+            <input id="opinionName" type="text" maxlength="80" placeholder="Ej. María López" required>
+          </div>
+          <div>
+            <label>Grupo / carrera</label>
+            <input id="opinionGroup" type="text" maxlength="80" placeholder="Ej. 3° Economía" required>
+          </div>
+        </div>
+        <div>
+          <label>Valoración general</label>
+          <div class="rating-row" id="ratingRow" aria-label="Valoración de 1 a 5 estrellas">
+            <button type="button" onclick="setOpinionRating(1)">★</button>
+            <button type="button" onclick="setOpinionRating(2)">★★</button>
+            <button type="button" onclick="setOpinionRating(3)">★★★</button>
+            <button type="button" onclick="setOpinionRating(4)">★★★★</button>
+            <button type="button" onclick="setOpinionRating(5)" class="active">★★★★★</button>
+          </div>
+        </div>
+        <div>
+          <label>Punto de vista</label>
+          <textarea id="opinionText" maxlength="900" placeholder="Escribe qué te pareció la web interactiva, el libro, los ejercicios, los exámenes por capítulo y qué mejorarías." required></textarea>
+        </div>
+        <div class="opinion-tools">
+          <button class="btn" type="submit">Guardar opinión</button>
+          <button class="btn secondary" type="button" onclick="clearOpinionForm()">Limpiar formulario</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="card">
+      <h3>Opiniones registradas</h3>
+      <div id="opinionsSummary" class="result">Aún no hay opiniones registradas.</div>
+      <div class="opinion-tools">
+        <button class="btn secondary" type="button" onclick="exportStudentOpinions()">Exportar opiniones</button>
+        <button class="btn secondary" type="button" onclick="clearStudentOpinions()">Borrar opiniones</button>
+      </div>
+      <div class="opinion-list" id="opinionsList" style="margin-top:14px"></div>
+    </div>
+  </div>
+</section>
+
+<div class="footer">© 2026 Dr. Antonio Salazar Campos · Universidad del Istmo · Diseño autónomo en HTML, CSS y JavaScript, sin dependencias externas.</div>
+</main>
+</div>
+<button class="btn mobile-menu" onclick="document.getElementById('sidebar').classList.toggle('open')">Menú</button>
+<script>
+
+const VISIT_COUNTER_KEY = 'microeconomia_visitas_locales_v1';
+function updateVisitCounter(){
+  const current = Number(localStorage.getItem(VISIT_COUNTER_KEY) || 0) + 1;
+  localStorage.setItem(VISIT_COUNTER_KEY, String(current));
+  const el = document.getElementById('visitCount');
+  if(el) el.textContent = current.toLocaleString('es-MX');
+}
+function resetVisitCounter(){
+  localStorage.setItem(VISIT_COUNTER_KEY, '0');
+  const el = document.getElementById('visitCount');
+  if(el) el.textContent = '0';
+}
+updateVisitCounter();
+
+const chapters = [{"id": "cap1", "num": 1, "title": "Introducción a la Microeconomía", "subtitle": "Escasez, elección, costo de oportunidad y FPP", "focus": ["Desarrollo histórico y epistemológico", "Escasez y elección", "Costo de oportunidad", "Frontera de Posibilidades de Producción", "Diez principios de Mankiw"], "news": ["La crisis financiera global cuestionó modelos de racionalidad plena.", "La IA generativa abrió preguntas sobre productividad, mercados digitales y costo marginal cercano a cero.", "Los mercados latinoamericanos muestran informalidad, desigualdad y restricciones institucionales."], "formulas": ["Costo de oportunidad = valor de la mejor alternativa sacrificada", "FPP lineal: T = Tmáx − (Tmáx/Amáx)·A", "Punto eficiente: sobre la frontera; ineficiente: interior; inalcanzable: exterior"], "exercises": ["1.1 Escasez y costo de oportunidad: estudiante con 8 horas libres; comparar estudiar, trabajar y ocio.", "1.2 FPP lineal: país que produce trigo y automóviles; ecuación, sacrificio y desplazamiento tecnológico.", "1.3 Principios de Mankiw: relacionar situaciones con disyuntivas, costo de oportunidad, pensamiento marginal e incentivos.", "1.4 FPP cóncava: calcular costos de oportunidad marginales entre puntos y explicar rendimientos decrecientes.", "1.5 IA y FPP tecnológica: discutir si la IA desplaza la frontera o genera movimiento hacia ella.", "1.6 Economía del comportamiento: sesgos cognitivos, streaming y diseño de nudges."], "exam": [{"q": "¿Qué problema económico central da origen a la microeconomía?", "o": ["La abundancia de recursos", "La escasez frente a necesidades múltiples", "La ausencia de precios", "La eliminación del intercambio"], "a": 1, "f": "La microeconomía parte de la escasez: recursos limitados y usos alternativos."}, {"q": "El costo de oportunidad de una decisión es:", "o": ["El gasto monetario total", "El valor de la mejor alternativa sacrificada", "El precio promedio del mercado", "El costo fijo de producir"], "a": 1, "f": "No siempre es dinero; incluye tiempo, ingreso o beneficios renunciados."}, {"q": "Un punto por debajo de la FPP indica:", "o": ["Eficiencia plena", "Combinación inalcanzable", "Uso ineficiente de recursos", "Crecimiento económico"], "a": 2, "f": "Un punto interior refleja desempleo, capacidad ociosa o asignación deficiente."}, {"q": "La economía del comportamiento cuestiona principalmente:", "o": ["La existencia de mercados", "La racionalidad perfecta del agente económico", "La utilidad marginal decreciente", "La escasez de recursos"], "a": 1, "f": "Kahneman, Tversky y Thaler muestran sesgos sistemáticos en las decisiones."}, {"q": "Cuando mejora la tecnología de una economía, la FPP:", "o": ["Se desplaza hacia afuera", "Se contrae necesariamente", "Se vuelve vertical", "Desaparece"], "a": 0, "f": "El progreso tecnológico permite producir más con los mismos recursos."}], "tool": "fpp"}, {"id": "cap2", "num": 2, "title": "Oferta y Demanda", "subtitle": "Demanda, oferta, equilibrio, excedentes y controles de precio", "focus": ["Ley de la demanda", "Ley de la oferta", "Equilibrio de mercado", "Desplazamientos de curvas", "Excedentes y pérdida de peso muerto"], "news": ["La escasez global de microchips desplazó la oferta de autos y electrónicos.", "La guerra en Ucrania elevó precios de trigo al restringir oferta.", "El mercado de vivienda en grandes ciudades refleja restricciones de oferta."], "formulas": ["Demanda: Qd = a − bP", "Oferta: Qs = c + dP", "Equilibrio: Qd = Qs", "EC = ½(Pmáx − P*)Q*; EP = ½(P* − Pmín)Q*"], "exercises": ["2.1 Mercado de aguacates: calcular equilibrio, exceso de demanda/oferta y efecto de sequía.", "2.2 Desplazamientos: clasificar si cambia demanda u oferta y efecto sobre P* y Q*.", "2.3 Excedentes e impuesto: calcular EC, EP, incidencia y pérdida de peso muerto.", "2.4 Controles de precio: techo y piso en mercado de alquiler; escasez y excedente.", "2.5 Caso tortilla en México: choque simultáneo de oferta y demanda; política pública alternativa."], "exam": [{"q": "La ley de la demanda establece que, ceteris paribus:", "o": ["Precio y cantidad demandada se mueven en la misma dirección", "Precio y cantidad demandada se mueven en dirección inversa", "La oferta siempre cae", "El equilibrio desaparece"], "a": 1, "f": "Si el precio sube, la cantidad demandada tiende a disminuir."}, {"q": "Un aumento del costo de los insumos desplaza:", "o": ["La demanda a la derecha", "La oferta a la izquierda", "La demanda a la izquierda", "La oferta a la derecha"], "a": 1, "f": "Mayores costos reducen la disposición de los productores a ofrecer a cada precio."}, {"q": "El equilibrio de mercado ocurre cuando:", "o": ["Qd = Qs", "P = 0", "La demanda es vertical", "El gobierno fija precio"], "a": 0, "f": "En equilibrio no hay escasez ni excedente."}, {"q": "Un precio máximo efectivo suele generar:", "o": ["Exceso de oferta", "Escasez", "Mayor producción siempre", "Equilibrio automático"], "a": 1, "f": "Si el techo está por debajo del equilibrio, Qd supera a Qs."}, {"q": "El excedente del consumidor mide:", "o": ["Costo total de la empresa", "Diferencia entre disposición a pagar y precio pagado", "Impuesto total recaudado", "Utilidad contable"], "a": 1, "f": "Es una medida monetaria del beneficio neto del comprador."}], "tool": "equilibrium"}, {"id": "cap3", "num": 3, "title": "Elasticidad", "subtitle": "Sensibilidad de la demanda, ingreso total y política pública", "focus": ["Elasticidad precio de la demanda", "Elasticidad ingreso", "Elasticidad cruzada", "Elasticidad precio de la oferta", "Regla de Ramsey e impuestos"], "news": ["Combustibles muestran baja elasticidad de corto plazo.", "El impuesto al refresco en México ilustra elasticidad y salud pública.", "Streaming muestra mayor elasticidad por sustitutos cercanos."], "formulas": ["Ep = %ΔQd / %ΔP", "Punto medio: [(Q2−Q1)/Qprom] / [(P2−P1)/Pprom]", "Ei > 0 bien normal; Ei < 0 bien inferior", "Exy > 0 sustitutos; Exy < 0 complementarios"], "exercises": ["3.1 Gasolina: calcular elasticidad con fórmula del punto medio e impacto en ingreso total.", "3.2 Clasificación de bienes: sal, automóvil de lujo, autobús, streaming y tortillas.", "3.3 Elasticidad cruzada: sustitutos, complementarios y política pública.", "3.4 Telecomunicaciones: Lerner y discriminación de precios por segmento.", "3.5 Impuesto al refresco en México: estimar elasticidad y debatir eficiencia/equidad."], "exam": [{"q": "Una demanda es elástica cuando |Ep| es:", "o": ["Menor que 1", "Igual a 0", "Mayor que 1", "Negativa siempre"], "a": 2, "f": "|Ep| > 1 implica respuesta proporcional de cantidad mayor que la del precio."}, {"q": "Si la demanda es inelástica y el precio sube, el ingreso total:", "o": ["Tiende a subir", "Tiende a bajar", "Siempre es cero", "No puede calcularse nunca"], "a": 0, "f": "La caída porcentual en cantidad es menor que el aumento porcentual en precio."}, {"q": "Una elasticidad cruzada positiva indica bienes:", "o": ["Complementarios", "Sustitutos", "Inferiores", "Públicos"], "a": 1, "f": "Si sube el precio de Y y aumenta Qx, X e Y compiten entre sí."}, {"q": "Una elasticidad ingreso negativa corresponde a un bien:", "o": ["Normal", "De lujo", "Inferior", "De club"], "a": 2, "f": "Al aumentar el ingreso, cae la demanda del bien inferior."}, {"q": "La Regla de Ramsey sugiere gravar más bienes con demanda:", "o": ["Muy elástica", "Perfectamente elástica", "Inelástica", "Sin consumo"], "a": 2, "f": "Los bienes inelásticos reducen menos la cantidad intercambiada ante impuestos."}], "tool": "elasticity"}, {"id": "cap4", "num": 4, "title": "Teoría del Consumidor", "subtitle": "Preferencias, utilidad, restricción presupuestaria y nudges", "focus": ["Utilidad marginal", "Curvas de indiferencia", "Restricción presupuestaria", "Efecto sustitución e ingreso", "Economía del comportamiento"], "news": ["Angus Deaton recibió el Nobel por análisis del consumo, pobreza y bienestar.", "Richard Thaler popularizó el nudge en política pública.", "La pandemia cambió preferencias hacia bienes domésticos y tecnología."], "formulas": ["UMg = ΔU/ΔQ", "Óptimo: UMgX/PX = UMgY/PY", "Restricción: PX·X + PY·Y = I", "RMS = UMgX/UMgY = PX/PY"], "exercises": ["4.1 Maximización de utilidad con U(x,y)=x·y y restricción presupuestaria.", "4.2 Complementarios perfectos: canasta óptima, elasticidad-ingreso y curva de Engel.", "4.3 Efecto sustitución e ingreso con cambio de precio.", "4.4 Excedente del consumidor y variación compensada en streaming.", "4.5 Proyecto: diseñar un nudge para resolver un problema universitario."], "exam": [{"q": "La utilidad marginal mide:", "o": ["La satisfacción adicional de una unidad más", "El costo fijo total", "El precio máximo del productor", "La inflación acumulada"], "a": 0, "f": "La utilidad marginal es el cambio en utilidad ante una unidad adicional."}, {"q": "El óptimo del consumidor con dos bienes se alcanza cuando:", "o": ["Gasta cero", "UMgX/PX = UMgY/PY", "PX = PY siempre", "La curva de indiferencia cruza el eje"], "a": 1, "f": "Iguala utilidad marginal por peso gastado."}, {"q": "La restricción presupuestaria representa:", "o": ["Deseos ilimitados", "Combinaciones accesibles dado ingreso y precios", "Solo bienes públicos", "La curva de oferta"], "a": 1, "f": "Delimita qué canastas puede comprar el consumidor."}, {"q": "El efecto sustitución ante un aumento de precio:", "o": ["Favorece el bien encarecido", "Reduce consumo del bien relativamente más caro", "Elimina la escasez", "No existe en microeconomía"], "a": 1, "f": "El consumidor sustituye hacia alternativas relativamente más baratas."}, {"q": "Un nudge se caracteriza por:", "o": ["Prohibir una conducta", "Modificar el entorno de decisión sin eliminar opciones", "Eliminar los precios", "Imponer monopolios"], "a": 1, "f": "El nudge guía decisiones conservando libertad de elección."}], "tool": "consumer"}, {"id": "cap5", "num": 5, "title": "Teoría de la Producción y Costos", "subtitle": "Función de producción, costos, escala y tecnología", "focus": ["Producto total, medio y marginal", "Rendimientos decrecientes", "Costos fijos, variables y marginales", "Economías de escala", "Cobb-Douglas"], "news": ["La inflación de costos comprimió márgenes manufactureros.", "La IA generativa combina costos fijos enormes con costo marginal casi nulo.", "Tesla y baterías ilustran economías de escala."], "formulas": ["CT = CF + CV", "CMg = ΔCT/ΔQ", "CMe = CT/Q; CVMe = CV/Q; CFMe = CF/Q", "Cobb-Douglas: Q = A·K^α·L^β"], "exercises": ["5.1 Producto marginal y rendimientos decrecientes: calcular PT, PMgL y PML.", "5.2 Estructura de costos: CT, CMe, CVMe, CMg y regla de cierre.", "5.3 Cobb-Douglas: rendimientos a escala y combinación óptima K/L.", "5.4 Curvas de costo de largo plazo y envolvente inferior.", "5.5 Caso IA generativa: costos fijos altos, costo marginal casi nulo y competencia."], "exam": [{"q": "El costo marginal es:", "o": ["Costo fijo dividido entre producción", "Costo adicional de producir una unidad más", "Ingreso total menos costo total", "Costo hundido"], "a": 1, "f": "CMg = ΔCT/ΔQ."}, {"q": "La regla de cierre de corto plazo indica cerrar si:", "o": ["P < CVMe mínimo", "P > CMe", "P = CMg", "CFMe cae"], "a": 0, "f": "Si no cubre costos variables, producir aumenta la pérdida."}, {"q": "En Cobb-Douglas, si α+β>1 hay:", "o": ["Rendimientos decrecientes", "Rendimientos constantes", "Rendimientos crecientes", "No hay producción"], "a": 2, "f": "Duplicar insumos aumenta la producción más del doble."}, {"q": "El costo fijo medio tiende a:", "o": ["Aumentar siempre con Q", "Disminuir al aumentar Q", "Ser igual al precio", "Ser negativo"], "a": 1, "f": "El costo fijo se reparte entre más unidades."}, {"q": "La ley de rendimientos decrecientes aparece cuando:", "o": ["Con un factor fijo, el producto marginal eventualmente cae", "Todos los factores se duplican", "No hay tecnología", "El precio es cero"], "a": 0, "f": "Es típica del corto plazo con capital fijo."}], "tool": "costs"}, {"id": "cap6", "num": 6, "title": "Estructuras de Mercado", "subtitle": "Competencia, monopolio, oligopolio y teoría de juegos", "focus": ["Competencia perfecta", "Monopolio", "Índice de Lerner", "Discriminación de precios", "Oligopolio, Cournot y Nash"], "news": ["Casos antimonopolio contra Google reactivaron debate sobre poder de mercado digital.", "La IA generativa muestra barreras de entrada elevadas.", "La Ley de Mercados Digitales de la UE regula plataformas dominantes."], "formulas": ["Competencia perfecta: P = CMg", "Monopolio: IMg = CMg", "Lerner: L = (P−CMg)/P = −1/Ep", "Beneficio = (P−CMe)·Q"], "exercises": ["6.1 Competencia perfecta y monopolio: equilibrio, excedentes, beneficio y peso muerto.", "6.2 Dilema del prisionero en aerolíneas: estrategia dominante y Nash.", "6.3 Discriminación de precios en cine: estudiantes vs adultos.", "6.4 Modelo de Cournot: funciones de reacción y equilibrio.", "6.5 Google y búsquedas: monopolio, remedios y precio cero."], "exam": [{"q": "En competencia perfecta, la empresa maximiza donde:", "o": ["P = CMg", "P = 0", "IMg < CMg siempre", "Q = 0"], "a": 0, "f": "La empresa toma precio y produce hasta que precio iguala costo marginal."}, {"q": "El monopolista maximiza beneficios cuando:", "o": ["P = 0", "IMg = CMg", "Qd = 0", "EP = 0"], "a": 1, "f": "Luego fija el precio sobre la curva de demanda."}, {"q": "El Índice de Lerner mide:", "o": ["Desigualdad", "Poder de mercado", "Elasticidad ingreso", "Costo fijo"], "a": 1, "f": "L=(P−CMg)/P; cuanto mayor, mayor margen sobre costo marginal."}, {"q": "El Equilibrio de Nash implica que:", "o": ["Todos cooperan necesariamente", "Nadie mejora cambiando unilateralmente", "No hay precios", "El gobierno fija cantidades"], "a": 1, "f": "Es una estabilidad estratégica individual."}, {"q": "La discriminación de precios requiere:", "o": ["No poder separar grupos", "Poder segmentar mercados y evitar reventa", "Precio único obligatorio", "Demanda perfectamente vertical"], "a": 1, "f": "Sin segmentación y control de arbitraje, no se sostiene."}], "tool": "market"}, {"id": "cap7", "num": 7, "title": "Externalidades, Bienes Públicos y Fallas de Mercado", "subtitle": "Pigou, Coase, bienes públicos, información asimétrica y ambiente", "focus": ["Externalidades negativas y positivas", "Impuestos y subsidios pigouvianos", "Bienes públicos y free rider", "Recursos comunes", "Selección adversa y riesgo moral"], "news": ["La escasez de agua en el norte de México ilustra tragedia de los comunes.", "Los impuestos al carbono reflejan el marco pigouviano.", "Las vacunas muestran rasgos de bien público global."], "formulas": ["Costo social = costo privado + costo externo", "Impuesto pigouviano: t* = costo marginal externo", "Bien público: no rival + no excluible", "Selección adversa: problema antes del contrato; riesgo moral: después"], "exercises": ["7.1 Impuesto pigouviano: equilibrio privado, óptimo social, sobreproducción y peso muerto.", "7.2 Alumbrado vecinal: bien público, free rider y cobro de Lindahl.", "7.3 Seguros de salud: selección adversa, prima promedio, señalización y copagos.", "7.4 Crédito con información asimétrica: tasa promedio, selección adversa y scoring.", "7.5 Política ambiental: impuesto al carbono y mercado cap-and-trade en México."], "exam": [{"q": "Una externalidad negativa genera:", "o": ["Producción privada excesiva", "Producción privada nula siempre", "Mayor eficiencia automática", "Demanda perfectamente elástica"], "a": 0, "f": "El agente no internaliza el costo impuesto a terceros."}, {"q": "Un bien público puro es:", "o": ["Rival y excluible", "No rival y no excluible", "Rival y no excluible", "No rival y excluible"], "a": 1, "f": "Ejemplos: defensa nacional, alumbrado público no congestionado."}, {"q": "El problema del free rider aparece porque:", "o": ["Todos pueden ser excluidos fácilmente", "Es difícil excluir a quien no paga", "No existe beneficio social", "Los costos fijos son negativos"], "a": 1, "f": "Las personas tienen incentivo a beneficiarse sin contribuir."}, {"q": "La selección adversa ocurre:", "o": ["Después del contrato por menor cuidado", "Antes del contrato por información oculta", "Solo en monopolios", "Solo con bienes públicos"], "a": 1, "f": "El tipo o calidad es información privada antes de transar."}, {"q": "El impuesto pigouviano óptimo debe igualar:", "o": ["El precio de mercado", "El costo marginal externo en el óptimo", "El ingreso promedio", "El costo fijo total"], "a": 1, "f": "Así se internaliza el daño externo."}], "tool": "public"}, {"id": "cap8", "num": 8, "title": "Mercados de Factores y Distribución del Ingreso", "subtitle": "Trabajo, capital humano, monopsonio, desigualdad y salario", "focus": ["Demanda de trabajo", "Oferta de trabajo", "Capital humano", "Diferencias salariales", "Curva de Lorenz y Gini"], "news": ["El salario mínimo en México creció significativamente durante 2022-2024.", "La IA puede afectar tareas laborales y demanda de habilidades.", "La desigualdad mexicana se refleja en un Gini elevado."], "formulas": ["VPMgL = P × PMgL", "Regla de contratación: VPMgL = w", "Curva de Lorenz: participación acumulada del ingreso", "Gini = 1 − 2·área bajo Lorenz"], "exercises": ["8.1 Demanda de trabajo: calcular VPMgL y empleo óptimo con diferentes salarios.", "8.2 Capital humano: retorno de licenciatura y maestría mediante VPN.", "8.3 Desigualdad: quintiles, Curva de Lorenz y coeficiente de Gini.", "8.4 Monopsonio laboral: salario, empleo, pérdida de bienestar y salario mínimo.", "8.5 Investigación: brecha salarial de género y políticas de reducción."], "exam": [{"q": "El VPMgL se calcula como:", "o": ["P × PMgL", "w/P", "CT/Q", "Ingreso menos costo fijo"], "a": 0, "f": "Mide el ingreso generado por el trabajador marginal."}, {"q": "Una empresa contrata trabajo hasta que:", "o": ["VPMgL = w", "w = 0", "PMgL = 0 siempre", "Qd = Qs de bienes públicos"], "a": 0, "f": "Mientras VPMgL supere salario, contratar aumenta beneficios."}, {"q": "El capital humano incluye:", "o": ["Solo maquinaria", "Educación, habilidades y experiencia", "Impuestos pigouvianos", "Bienes no excluibles"], "a": 1, "f": "Eleva productividad y puede explicar diferencias salariales."}, {"q": "El monopsonio laboral tiende a generar:", "o": ["Salarios competitivos más altos", "Salarios y empleo por debajo del competitivo", "No afecta empleo", "Solo inflación"], "a": 1, "f": "El empleador único enfrenta una oferta laboral ascendente."}, {"q": "El coeficiente de Gini mide:", "o": ["Poder de mercado", "Desigualdad del ingreso", "Costo marginal", "Elasticidad cruzada"], "a": 1, "f": "Va de 0 igualdad perfecta a 1 desigualdad máxima."}], "tool": "labor"}];
+const nav = document.getElementById('nav');
+nav.innerHTML = '<a href="#inicio"><b>⌂</b><span>Portada inicial</span></a>' + chapters.map(c=>`<a href="#${c.id}"><b>${c.num}</b><span>${c.title}</span></a>`).join('') + '<a href="#opinion"><b>★</b><span>Opinión estudiantil</span></a>';
+
+function toolHtml(c) {
+  if(c.tool==='fpp') return `<div class="card"><h3>Simulador FPP lineal</h3><div class="inputrow"><div><label>Trigo máximo</label><input id="fpp_t_${c.id}" type="number" value="1000"></div><div><label>Autos máximo</label><input id="fpp_a_${c.id}" type="number" value="500"></div><div><label>Autos elegidos</label><input id="fpp_x_${c.id}" type="number" value="200"></div><div><label>&nbsp;</label><button class="btn" onclick="calcFPP('${c.id}')">Calcular</button></div></div><div class="result" id="res_${c.id}">Calcula la ecuación y el trigo eficiente.</div></div>`;
+  if(c.tool==='equilibrium') return `<div class="card"><h3>Calculadora de equilibrio</h3><p style="color:var(--muted)">Use Qd=a−bP y Qs=c+dP.</p><div class="inputrow"><div><label>a</label><input id="a_${c.id}" type="number" value="500"></div><div><label>b</label><input id="b_${c.id}" type="number" value="20"></div><div><label>c</label><input id="cc_${c.id}" type="number" value="-100"></div><div><label>d</label><input id="d_${c.id}" type="number" value="30"></div></div><button class="btn" onclick="calcEq('${c.id}')">Calcular equilibrio</button><div class="result" id="res_${c.id}">P* y Q* aparecerán aquí.</div></div>`;
+  if(c.tool==='elasticity') return `<div class="card"><h3>Calculadora de elasticidad punto medio</h3><div class="inputrow"><div><label>P1</label><input id="p1_${c.id}" type="number" value="18"></div><div><label>Q1</label><input id="q1_${c.id}" type="number" value="200"></div><div><label>P2</label><input id="p2_${c.id}" type="number" value="22"></div><div><label>Q2</label><input id="q2_${c.id}" type="number" value="180"></div></div><button class="btn" onclick="calcElastic('${c.id}')">Calcular elasticidad</button><div class="result" id="res_${c.id}">La elasticidad aparecerá aquí.</div></div>`;
+  if(c.tool==='consumer') return `<div class="card"><h3>Óptimo Cobb-Douglas simple: U=x·y</h3><p style="color:var(--muted)">Para U=x·y, el consumidor gasta la mitad del ingreso en cada bien.</p><div class="inputrow"><div><label>Ingreso</label><input id="inc_${c.id}" type="number" value="120"></div><div><label>Px</label><input id="px_${c.id}" type="number" value="15"></div><div><label>Py</label><input id="py_${c.id}" type="number" value="20"></div><div><label>&nbsp;</label><button class="btn" onclick="calcConsumer('${c.id}')">Calcular</button></div></div><div class="result" id="res_${c.id}">x* y y* aparecerán aquí.</div></div>`;
+  if(c.tool==='costs') return `<div class="card"><h3>Calculadora de costos</h3><p style="color:var(--muted)">CT=CF+CV; CV=2Q²+10Q.</p><div class="inputrow"><div><label>CF</label><input id="cf_${c.id}" type="number" value="5000"></div><div><label>Q</label><input id="qq_${c.id}" type="number" value="50"></div><div><label>Precio</label><input id="pr_${c.id}" type="number" value="90"></div><div><label>&nbsp;</label><button class="btn" onclick="calcCosts('${c.id}')">Calcular</button></div></div><div class="result" id="res_${c.id}">Costos y beneficio aparecerán aquí.</div></div>`;
+  if(c.tool==='market') return `<div class="card"><h3>Índice de Lerner</h3><div class="inputrow"><div><label>Precio</label><input id="lp_${c.id}" type="number" value="80"></div><div><label>CMg</label><input id="lcm_${c.id}" type="number" value="40"></div><div><label>Elasticidad |Ep|</label><input id="lep_${c.id}" type="number" value="2"></div><div><label>&nbsp;</label><button class="btn" onclick="calcLerner('${c.id}')">Calcular</button></div></div><div class="result" id="res_${c.id}">El poder de mercado aparecerá aquí.</div></div>`;
+  if(c.tool==='public') return `<div class="card"><h3>Clasificador de bienes</h3><div class="inputrow"><div><label>Rivalidad</label><select id="riv_${c.id}"><option value="rival">Rival</option><option value="norival">No rival</option></select></div><div><label>Exclusión</label><select id="exc_${c.id}"><option value="excluible">Excluible</option><option value="noexcluible">No excluible</option></select></div><div><label>&nbsp;</label><button class="btn" onclick="classifyGood('${c.id}')">Clasificar</button></div></div><div class="result" id="res_${c.id}">La categoría aparecerá aquí.</div></div>`;
+  return `<div class="card"><h3>Calculadora VPMgL</h3><div class="inputrow"><div><label>Precio producto</label><input id="vp_${c.id}" type="number" value="80"></div><div><label>PMgL</label><input id="vpm_${c.id}" type="number" value="14"></div><div><label>Salario</label><input id="vw_${c.id}" type="number" value="800"></div><div><label>&nbsp;</label><button class="btn" onclick="calcLabor('${c.id}')">Calcular</button></div></div><div class="result" id="res_${c.id}">VPMgL y decisión aparecerán aquí.</div></div>`;
+}
+
+function chapterHtml(c) {
+ return `<section class="section" id="${c.id}"><div class="chapter-head"><div><div class="kicker">Capítulo ${c.num}</div><h2>${c.title}</h2><p>${c.subtitle}</p></div><div class="badge">Examen interactivo</div></div><div class="grid"><div class="card"><h3>Mapa del capítulo</h3><ul class="clean">${c.focus.map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="card"><h3>Noticias y elementos clave</h3><ul class="clean">${c.news.map(x=>`<li>📰 ${x}</li>`).join('')}</ul></div><div class="card"><h3>Fórmulas y criterios</h3>${c.formulas.map(x=>`<div class="formula">${x}</div>`).join('')}</div>${toolHtml(c)}</div><div class="grid" style="margin-top:18px"><div class="card"><h3>Ejercicios y actividades del capítulo</h3>${c.exercises.map((e,i)=>`<div class="exercise"><strong>${e}</strong><div class="tools"><button class="btn secondary" onclick="toggleReveal(this)">Ver guía de solución</button></div><div class="reveal">Guía: identifica variables, escribe la fórmula pertinente, sustituye los datos, interpreta el resultado económico y concluye con implicaciones para consumidores, empresas o política pública.</div></div>`).join('')}</div><div class="card"><h3>Examen interactivo</h3><div class="quiz" id="quiz_${c.id}">${c.exam.map((q,qi)=>`<div class="q" data-answer="${q.a}"><p>${qi+1}. ${q.q}</p>${q.o.map((op,oi)=>`<button class="option" onclick="answer(this,${oi},'${c.id}')">${op}</button>`).join('')}<div class="feedback">${q.f}</div></div>`).join('')}</div><div class="scorebox"><strong id="score_${c.id}">Puntaje: 0/${c.exam.length}</strong><button class="btn secondary" onclick="resetQuiz('${c.id}')">Reiniciar</button></div></div></div></section>`;
+}
+
+document.getElementById('chapters').innerHTML = chapters.map(chapterHtml).join('');
+
+function n(id) { return Number(document.getElementById(id).value); }
+function fmt(x) { return Number.isFinite(x) ? x.toLocaleString('es-MX',{maximumFractionDigits:2}) : '—'; }
+function toggleReveal(btn) { const r=btn.parentElement.nextElementSibling; r.style.display = r.style.display==='block'?'none':'block'; }
+function answer(btn, chosen, cid) { const q=btn.closest('.q'); if(q.dataset.done==='1') return; q.dataset.done='1'; const ans=Number(q.dataset.answer); q.querySelectorAll('.option').forEach((b,i)=>b.classList.add(i===ans?'correct':(i===chosen?'wrong':''))); q.querySelector('.feedback').style.display='block'; updateScore(cid); }
+function updateScore(cid) { let qs=[...document.querySelectorAll(`#quiz_${cid} .q`)]; let done=qs.filter(q=>q.dataset.done==='1'); let ok=done.filter(q=>q.querySelectorAll('.option')[Number(q.dataset.answer)].classList.contains('correct') && ![...q.querySelectorAll('.option')].some((b,i)=>i!==Number(q.dataset.answer)&&b.classList.contains('wrong'))).length; document.getElementById(`score_${cid}`).textContent=`Puntaje: ${ok}/${qs.length} respondidas: ${done.length}`; }
+function resetQuiz(cid) { document.querySelectorAll(`#quiz_${cid} .q`).forEach(q=>{q.dataset.done='0';q.querySelectorAll('.option').forEach(b=>b.className='option');q.querySelector('.feedback').style.display='none';}); document.getElementById(`score_${cid}`).textContent=`Puntaje: 0/${document.querySelectorAll(`#quiz_${cid} .q`).length}`; }
+function calcFPP(cid) { let T=n(`fpp_t_${cid}`), A=n(`fpp_a_${cid}`), x=n(`fpp_x_${cid}`); let slope=T/A, tr=T-slope*x; document.getElementById(`res_${cid}`).innerHTML=`Ecuación: <b>T = ${fmt(T)} − ${fmt(slope)}·A</b>. Con ${fmt(x)} autos, trigo eficiente = <b>${fmt(tr)}</b>.`; }
+function calcEq(cid) { let a=n(`a_${cid}`), b=n(`b_${cid}`), c=n(`cc_${cid}`), d=n(`d_${cid}`); let P=(a-c)/(b+d), Q=a-b*P; document.getElementById(`res_${cid}`).innerHTML=`Precio de equilibrio P* = <b>${fmt(P)}</b>; cantidad Q* = <b>${fmt(Q)}</b>.`; }
+function calcElastic(cid) { let P1=n(`p1_${cid}`),Q1=n(`q1_${cid}`),P2=n(`p2_${cid}`),Q2=n(`q2_${cid}`); let e=((Q2-Q1)/((Q2+Q1)/2))/((P2-P1)/((P2+P1)/2)); let type=Math.abs(e)>1?'elástica':Math.abs(e)<1?'inelástica':'unitaria'; document.getElementById(`res_${cid}`).innerHTML=`Ep = <b>${fmt(e)}</b>. En valor absoluto, la demanda es <b>${type}</b>.`; }
+function calcConsumer(cid) { let I=n(`inc_${cid}`), px=n(`px_${cid}`), py=n(`py_${cid}`); let x=I/(2*px), y=I/(2*py); document.getElementById(`res_${cid}`).innerHTML=`Óptimo: x* = <b>${fmt(x)}</b>, y* = <b>${fmt(y)}</b>. Gasto en cada bien = ${fmt(I/2)}.`; }
+function calcCosts(cid) { let cf=n(`cf_${cid}`), Q=n(`qq_${cid}`), P=n(`pr_${cid}`); let cv=2*Q*Q+10*Q, ct=cf+cv, cme=ct/Q, cvme=cv/Q, cmg=4*Q+10, profit=P*Q-ct; document.getElementById(`res_${cid}`).innerHTML=`CT=${fmt(ct)}, CMe=${fmt(cme)}, CVMe=${fmt(cvme)}, CMg≈${fmt(cmg)}, beneficio=${fmt(profit)}.`; }
+function calcLerner(cid) { let P=n(`lp_${cid}`), cm=n(`lcm_${cid}`), ep=n(`lep_${cid}`); let L=(P-cm)/P; let inv=1/ep; document.getElementById(`res_${cid}`).innerHTML=`Lerner observado = <b>${fmt(L)}</b>. Regla monopolio por elasticidad: 1/|Ep| = <b>${fmt(inv)}</b>.`; }
+function classifyGood(cid) { let r=document.getElementById(`riv_${cid}`).value, e=document.getElementById(`exc_${cid}`).value; let out = r==='rival'&&e==='excluible'?'Bien privado':r==='norival'&&e==='excluible'?'Bien de club':r==='rival'&&e==='noexcluible'?'Recurso común':'Bien público'; document.getElementById(`res_${cid}`).innerHTML=`Categoría: <b>${out}</b>.`; }
+function calcLabor(cid) { let P=n(`vp_${cid}`), pm=n(`vpm_${cid}`), w=n(`vw_${cid}`); let v=P*pm; document.getElementById(`res_${cid}`).innerHTML=`VPMgL = <b>${fmt(v)}</b>. Decisión: ${v>=w?'conviene contratar al trabajador marginal':'no conviene contratar al trabajador marginal'}.`; }
+
+
+
+const STUDENT_OPINIONS_KEY = 'microeconomia_opiniones_estudiantiles_v1';
+let selectedOpinionRating = 5;
+function escapeHtml(value){
+  return String(value).replace(/[&<>"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
+}
+function setOpinionRating(value){
+  selectedOpinionRating = value;
+  document.querySelectorAll('#ratingRow button').forEach((btn, index)=>{
+    btn.classList.toggle('active', index + 1 === value);
+  });
+}
+function getStudentOpinions(){
+  try { return JSON.parse(localStorage.getItem(STUDENT_OPINIONS_KEY) || '[]'); }
+  catch(e){ return []; }
+}
+function saveStudentOpinion(event){
+  event.preventDefault();
+  const name = document.getElementById('opinionName').value.trim();
+  const group = document.getElementById('opinionGroup').value.trim();
+  const text = document.getElementById('opinionText').value.trim();
+  if(!name || !group || !text){ return; }
+  const opinions = getStudentOpinions();
+  opinions.unshift({name, group, text, rating:selectedOpinionRating, date:new Date().toLocaleString('es-MX')});
+  localStorage.setItem(STUDENT_OPINIONS_KEY, JSON.stringify(opinions));
+  clearOpinionForm();
+  renderStudentOpinions();
+}
+function clearOpinionForm(){
+  const form = document.querySelector('.opinion-form');
+  if(form) form.reset();
+  setOpinionRating(5);
+}
+function renderStudentOpinions(){
+  const list = document.getElementById('opinionsList');
+  const summary = document.getElementById('opinionsSummary');
+  if(!list || !summary) return;
+  const opinions = getStudentOpinions();
+  if(opinions.length === 0){
+    summary.textContent = 'Aún no hay opiniones registradas.';
+    list.innerHTML = '<div class="empty-opinions">Cuando los estudiantes envíen su punto de vista, aparecerá aquí el historial de opiniones.</div>';
+    return;
+  }
+  const avg = opinions.reduce((acc,o)=>acc + Number(o.rating || 0),0) / opinions.length;
+  summary.innerHTML = `Opiniones registradas: <b>${opinions.length}</b> · Valoración promedio: <b>${fmt(avg)} / 5</b>`;
+  list.innerHTML = opinions.map((o, index)=>`<article class="opinion-item">
+    <div class="meta"><span><b>${escapeHtml(o.name)}</b> · ${escapeHtml(o.group)}</span><span>${escapeHtml(o.date)}</span></div>
+    <div class="stars">${'★'.repeat(Number(o.rating || 0))}${'☆'.repeat(5-Number(o.rating || 0))}</div>
+    <p>${escapeHtml(o.text)}</p>
+  </article>`).join('');
+}
+function clearStudentOpinions(){
+  if(confirm('¿Deseas borrar todas las opiniones guardadas en este navegador?')){
+    localStorage.removeItem(STUDENT_OPINIONS_KEY);
+    renderStudentOpinions();
+  }
+}
+function exportStudentOpinions(){
+  const opinions = getStudentOpinions();
+  if(opinions.length === 0){ alert('No hay opiniones para exportar.'); return; }
+  const header = ['Nombre','Grupo/Carrera','Valoración','Fecha','Opinión'];
+  const rows = opinions.map(o=>[o.name,o.group,o.rating,o.date,o.text]);
+  const csv = [header, ...rows].map(row=>row.map(cell=>`"${String(cell).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob = new Blob(['\ufeff'+csv], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'opiniones_estudiantes_microeconomia.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+renderStudentOpinions();
+
+const links=[...document.querySelectorAll('.nav a')];
+window.addEventListener('scroll',()=>{let fromTop=scrollY+120;links.forEach(a=>{let s=document.querySelector(a.getAttribute('href')); if(s && s.offsetTop<=fromTop && s.offsetTop+s.offsetHeight>fromTop) a.classList.add('active'); else a.classList.remove('active');})});
+</script>
+</body>
+</html>
