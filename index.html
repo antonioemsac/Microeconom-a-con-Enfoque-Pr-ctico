@@ -325,7 +325,7 @@ function resetQuiz(cid, removeStorage = true) {
   if(removeStorage) localStorage.removeItem(quizStorageKey(cid));
   updateScore(cid);
 }
-function calcFPPfunction calcFPP(cid) { let T=n(`fpp_t_${cid}`), A=n(`fpp_a_${cid}`), x=n(`fpp_x_${cid}`); let slope=T/A, tr=T-slope*x; document.getElementById(`res_${cid}`).innerHTML=`Ecuación: <b>T = ${fmt(T)} − ${fmt(slope)}·A</b>. Con ${fmt(x)} autos, trigo eficiente = <b>${fmt(tr)}</b>.`; }
+function calcFPP(cid) { let T=n(`fpp_t_${cid}`), A=n(`fpp_a_${cid}`), x=n(`fpp_x_${cid}`); let slope=T/A, tr=T-slope*x; document.getElementById(`res_${cid}`).innerHTML=`Ecuación: <b>T = ${fmt(T)} − ${fmt(slope)}·A</b>. Con ${fmt(x)} autos, trigo eficiente = <b>${fmt(tr)}</b>.`; }
 function calcEq(cid) { let a=n(`a_${cid}`), b=n(`b_${cid}`), c=n(`cc_${cid}`), d=n(`d_${cid}`); let P=(a-c)/(b+d), Q=a-b*P; document.getElementById(`res_${cid}`).innerHTML=`Precio de equilibrio P* = <b>${fmt(P)}</b>; cantidad Q* = <b>${fmt(Q)}</b>.`; }
 function calcElastic(cid) { let P1=n(`p1_${cid}`),Q1=n(`q1_${cid}`),P2=n(`p2_${cid}`),Q2=n(`q2_${cid}`); let e=((Q2-Q1)/((Q2+Q1)/2))/((P2-P1)/((P2+P1)/2)); let type=Math.abs(e)>1?'elástica':Math.abs(e)<1?'inelástica':'unitaria'; document.getElementById(`res_${cid}`).innerHTML=`Ep = <b>${fmt(e)}</b>. En valor absoluto, la demanda es <b>${type}</b>.`; }
 function calcConsumer(cid) { let I=n(`inc_${cid}`), px=n(`px_${cid}`), py=n(`py_${cid}`); let x=I/(2*px), y=I/(2*py); document.getElementById(`res_${cid}`).innerHTML=`Óptimo: x* = <b>${fmt(x)}</b>, y* = <b>${fmt(y)}</b>. Gasto en cada bien = ${fmt(I/2)}.`; }
